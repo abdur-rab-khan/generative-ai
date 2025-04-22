@@ -32,4 +32,39 @@
 
         > A wrapper around the `invoke` method for models that natively support `structured output`.
 
-    More find from [](https://python.langchain.com/api_reference/core/language_models/langchain_core.language_models.chat_models.BaseChatModel.html#)
+    More find from [LangChain API Reference](https://python.langchain.com/api_reference/core/language_models/langchain_core.language_models.chat_models.BaseChatModel.html#)
+
+## 🔠 Input and Output
+> Modern LLM's are accessed through chat interface that take [messages](../02_messages/messages.ipynb) as input and return [messages](../02_messages/messages.ipynb) as output. Messages are typically associated with a role (`human`,`system`,`assistant`) and one more content block that contain text or potentially multimodal data (e.g `image`,`video`,`audio`).
+
+> It is most commonly used to provide structured format. that make LLM's to follow this structure that giving the output.
+
+* LangChain supports two message formate.
+    1. **Lang Chain Message Format**
+    2. **OpenAI's Message Format**
+
+| Parameter | Description |
+|-----------|-------------|
+| `model` | The name or identifier of the specific AI model you want to use (e.g., "gpt-3.5-turbo" or "gpt-4"). |
+| `temperature` | Controls the randomness of the model's output. A higher value (e.g., 1.0) makes responses more creative, while a lower value (e.g., 0.0) makes them more deterministic and focused. |
+| `timeout` | The maximum time (in seconds) to wait for a response from the model before canceling the request. Ensures the request doesn't hang indefinitely. |
+| `max_tokens` | Limits the total number of tokens (words and punctuation) in the response. This controls how long the output can be. |
+| `stop` | Specifies stop sequences that indicate when the model should stop generating tokens. For example, you might use specific strings to signal the end of a response. |
+| `max_retries` | The maximum number of attempts the system will make to resend a request if it fails due to issues like network timeouts or rate limits. |
+| `api_key` | The API key required for authenticating with the model provider. This is usually issued when you sign up for access to the model. |
+| `base_url` | The URL of the API endpoint where requests are sent. This is typically provided by the model's provider and is necessary for directing your requests. |
+| `rate_limiter` | An optional BaseRateLimiter to space out requests to avoid exceeding rate limits. See rate-limiting below for more details. |
+
+* Chat Model also supports other parameters you can see from there [API Reference](https://python.langchain.com/api_reference/)
+
+
+## 🔨 Tool Calling
+> Chat model can call [tools](../04_tool/tool.ipynb) to perform tasks such as fetching data from database, making API request or can running custom code.
+
+> See the guides of [tool calling](../04_tool/tool_calling.ipynb) for more information.
+
+## 💬 Structured Output
+> Chat model can respond structured output in particular format(such as `JSON`, `Custom Schema`) by using [Structured Output](../05_structured_output/structured_output.ipynb).
+
+## 🤹🏻 Multimodality
+> 
