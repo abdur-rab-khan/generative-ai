@@ -35,7 +35,7 @@
 - **More find from** [LangChain API Reference](https://python.langchain.com/api_reference/core/language_models/langchain_core.language_models.chat_models.BaseChatModel.html#)
 
 ## 🔠 Input and Output
-> Modern LLM's are accessed through chat interface that take [messages](../02_messages/messages.ipynb) as input and return [messages](../02_messages/messages.ipynb) as output.
+> Modern LLM's are accessed through chat interface that take [messages](../02_messages/messages.md) as input and return [messages](../02_messages/messages.md) as output.
 * Messages are typically associated with a role (`human`,`system`,`assistant`) and one more content block that contain text or potentially multimodal data (e.g `image`,`video`,`audio`).
 * It is most commonly used to provide structured format. that make LLM's to follow this structure that giving the output.
 
