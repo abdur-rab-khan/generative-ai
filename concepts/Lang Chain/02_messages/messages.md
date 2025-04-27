@@ -7,7 +7,7 @@
   - [LangChain Message](#langchain-message)
   - [OpenAI Format](#openai-format)
       - [Output](#output)
-
+* [See Practical Examples](../13_prompt_template/prompot_template.ipynb)
 > Messages in LangChain is the core component that represent the input and output of a [chat model](../01_chat_model/chat_model.md). as well as it is also used to give the context or meta data about the conversation.
 
 * So usually messages are come with role (`system`,`human`,`assistance`) and content (`text`, `multimodal data`) with additional meta data that varies on the chat model.
@@ -85,7 +85,7 @@
     
     * Different Chat Provider may support message in a following way.
         1. **Through a `system` message role**
-        2. **Through a separated api paramerter**
+        2. **Through a separated api parameter**
         3. **No Message support**
        
     ### 2. HumanMessage
