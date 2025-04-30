@@ -1,14 +1,14 @@
-# ⚒️ Tools in LangChain
+# Tools in LangChain
 >
 > In LangChain Tools are simple Python **function** with a **schema** that defines function **name**, **description** and **expected args**. Tools can be passed to [chat model](../01_chat_model/chat_model.md) that support [tool calling](./tool_calling.md) allowing the model to request the execution of function with specific output.
 
-- [⚒️ Tools in LangChain](#️-tools-in-langchain)
+- [Tools in LangChain](#tools-in-langchain)
   - [Key Concept](#key-concept)
   - [Tool Interface](#tool-interface)
   - [How to create tools](#how-to-create-tools)
-  - [1. Create tools using function](#1-create-tools-using-function)
-  - [2. Creating Tools using `runnables`](#2-creating-tools-using-runnables)
-  - [3. Subclass BaseTool](#3-subclass-basetool)
+    - [1. Create tools using function](#1-create-tools-using-function)
+    - [2. Creating Tools using `runnables`](#2-creating-tools-using-runnables)
+    - [3. Subclass BaseTool](#3-subclass-basetool)
   - [Tool artifacts](#tool-artifacts)
   - [Special type annotations](#special-type-annotations)
   - [Best practices](#best-practices)
@@ -44,12 +44,11 @@
     2. [LangChain Runnables](#2-creating-tools-using-runnables)
     3. [By sub-class from `BaseTool`](#3-subclass-basetool) -- This is most flexible and customizable method to create tool.
 
-## 1. Create tools using function
+### 1. Create tools using function
+
+  > Tool are commonly use in constructing `agents`, you will need to provide list of `tools`. See For More Details [How to create tools](https://python.langchain.com/docs/how_to/custom_tools/)
 
 - The recommended way to create a tool is using [`@tool`](https://python.langchain.com/api_reference/core/tools/langchain_core.tools.convert.tool.html) decorator. The decorator is design to simply the creation and should be used in most cases.
-
-  - [How to create tools](https://python.langchain.com/docs/how_to/custom_tools/)
-    > Tool are commonly use in constructing `agents`, you will need to provide list of `tools`.
 
   - There are two way to create tools using functions
     1. [Using `@tool` decorators](#1-tool)
@@ -57,23 +56,23 @@
 
     ### 1. `@tool`
 
-      > This `@tool` is the simples way to define a custom **tool**.The decorator uses the function name as the tool name by default, but this can be overridden by passing a string as the first argument. Additionally, the decorator will use the function's docstring as the tool's description - so a docstring MUST be provided.
+      > This `@tool` is the simples way to define a custom **tool**. The decorator uses the function name as the tool name by default, but this can be overridden by passing a string as the first argument to `@tool` decorator. Additionally, the decorator will use the function's docstring as the tool's description - so a docstring MUST be provided.
   
     - **Examples**
   
       ```python
-        from langchain_core.tools import tool
-    
-        @tool
-        def multiply(a: int, b: int) -> int:
-            """Multiply two numbers."""
-            return a * b
+      from langchain_core.tools import tool
+  
+      @tool
+      def multiply(a: int, b: int) -> int:
+          """Multiply two numbers."""
+          return a * b
         
         
-        # Let's inspect some of the attributes associated with the tool.
-        print(multiply.name)
-        print(multiply.description)
-        print(multiply.args)
+      # Let's inspect some of the attributes associated with the tool.
+      print(multiply.name)
+      print(multiply.description)
+      print(multiply.args)
       ```
   
       - **Note** that `@tool` also supports parsing of [`Annotated`](../additionals/annotated.ipynb), nested schema, and other features.
@@ -92,7 +91,7 @@
         return a * max(b)
         ```
   
-      - Also we can **customize** **tool name** and JSON args by passing them into the tool decorator
+      - Also we can **customize**, **tool name** and JSON args by passing them into the tool decorator
   
         ```python
         from pydantic import BaseModel, Field
@@ -215,9 +214,9 @@
         {'a': {'description': 'first number', 'title': 'A', 'type': 'integer'}, 'b': {'description': 'second number', 'title': 'B', 'type': 'integer'}}
         ```
 
-## 2. Creating Tools using [`runnables`](../additionals/runnable.md)
+### 2. Creating Tools using [`runnables`](../additionals/runnable.md)
 
-## 3. Subclass BaseTool
+### 3. Subclass BaseTool
   
   > You can define custom tool by sub-classing from `BaseTool`. This providers maximum control over the tool definition, but require writing more codes.
 
@@ -267,9 +266,31 @@
 
 ## Tool artifacts
 
+> Tools are utilities that can be called by model, and it is design to send back the result to the model. but sometime we may want to send some metadata about the actual result here `tool artifacts` are came in play. For Example we have custom tool that return object, a dataframe, image, we may want to pass some metadata about the output to the model without passing actual output to the model. At the time same output we may want to be able this full output elsewhere, for example downstream tools.
+
+- ***💀 Note*** : "To use `Tool artifacts` we have to change `response_format = "content_and_artifacts"` to the tool."
+
+- **Example**
+
+  ```python
+  from langchain_core.tools import tool
+
+  @tool(response_format="content_and_artifacts")
+  def some_tool(...) -> Tuple[str, any]:
+    """Tool that does something"""
+    
+    return "Message for chat model" , some_artifacts
+  ```
+
 ## Special type annotations
 
 ## Best practices
+
+- When designing a tool used by the model, keep the following in mind:
+  
+  1. Tools are should be well named, correctly-documented and properly type-hinted are make easier for the model.
+  2. Design simple and narrowly scoped (very specific task), as they are easier for the model to use.
+  3. Use chat models that support [tool calling](./tool_calling.md)
 
 ## How to create async tools
 
