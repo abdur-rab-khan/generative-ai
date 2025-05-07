@@ -130,7 +130,7 @@ class ResponseFormatter(BaseModel):
     2. In addition, the method needs to instruct to *always* use when we want to enforce structured  output.
     3. When JSON mode is used, the output needs to be parsed into a JSON object.
 
-- With these challenges in mind, LangChain provides a helper function (with_structured_output()) to streamline the process.
+- With these challenges in mind, LangChain provides a helper function (with_structured_output()) to streamline the process. Here we pass schema as input which specifies the names, types, and description of the desire output attributes.
 
     ![structured-output](https://python.langchain.com/assets/images/with_structured_output-4fd0fdc94f644554d52c6a8dee96ea21.png)
 
@@ -155,3 +155,5 @@ class ResponseFormatter(BaseModel):
     ```shell
     ResponseFormatter(answer="The powerhouse of the cell is the mitochondrion (plural: mitochondria). Mitochondria are organelles that generate most of the cell's supply of adenosine triphosphate (ATP), used as a source of chemical energy. They are often referred to as the powerhouse because they play a crucial role in energy production through the process of cellular respiration.", followup_questions='What other functions do mitochondria have in the cell?')
     ```
+
+- For better understanding see [here](../apps/joke_generator/joke_generator.ipynb)
