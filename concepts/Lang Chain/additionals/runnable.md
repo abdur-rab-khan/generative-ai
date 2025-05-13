@@ -72,8 +72,8 @@ for chunk in runnable.stream(range(5)):
 ## Optimized parallel execution (batch)
 
 - LangChain Runnable provided build-in API's to process multiple inputs in parallel that improve performance significantly:
-        1. **`batch`**: Process multiple inputs in parallel, return outputs in same order as the inputs.
-        2. **`batch_as_completed`**: Same as previous one, but result value as they completed it can be out of order.
+  1. **`batch`**: Process multiple inputs in parallel, return outputs in same order as the inputs.
+  2. **`batch_as_completed`**: Same as previous one, but result value as they completed it can be out of order.
 
 - **Note**: The implementation of **`batch`** and **`batch_as_completed`** use **thread** tool executor to run in parallel.
 
@@ -91,28 +91,28 @@ for chunk in runnable.stream(range(5)):
 Streaming is critical in application based on LLM feel responsive to end user.
 
 - Runnables Provides three API's for streaming
-        1. sync ➡️ **`stream`**, async ➡️ **`astream`**: yields the output.
-        2. The async ➡️ **`astream_events`**: A more advanced API allowing as to stream from intermediate to final step.
+  1. sync ➡️ **`stream`**, async ➡️ **`astream`**: yields the output.
+  2. The async ➡️ **`astream_events`**: A more advanced API allowing as to stream from intermediate to final step.
 
 ## Input and Output types
 
 Every **`Runnables`** are characterized by an input and output types (It can be python object and defined by runnable).
 
 - Runnable methods works with these input/output types:
-  - invoke: Accepts an input and return output
-  - batch: Accepts list of inputs and return list of outputs
-  - stream: Accepts input and return a generator that yields outputs
+  - **`invoke`**: Accepts an input and return output
+  - **`batch`**: Accepts list of inputs and return list of outputs
+  - **`stream`**: Accepts input and return a generator that yields outputs
 
 - The input type and output type vary by component:
 
-| Component | Input Type | Output Type |
-|-----------|------------|-------------|
-| Prompt | dictionary | PromptValue |
-| ChatModel | a string, list of chat messages or a PromptValue | ChatMessage |
-| LLM | a string, list of chat messages or a PromptValue | String |
-| OutputParser | the output of an LLM or ChatModel | Depends on the parser |
-| Retriever | a string | List of Documents |
-| Tool | a string or dictionary, depending on the tool | Depends on the tool |
+  | Component | Input Type | Output Type |
+  |-----------|------------|-------------|
+  | Prompt | dictionary | PromptValue |
+  | ChatModel | a string, list of chat messages or a PromptValue | ChatMessage |
+  | LLM | a string, list of chat messages or a PromptValue | String |
+  | OutputParser | the output of an LLM or ChatModel | Depends on the parser |
+  | Retriever | a string | List of Documents |
+  | Tool | a string or dictionary, depending on the tool | Depends on the tool |
 
 ## [Inspecting Schemas](https://python.langchain.com/docs/concepts/runnables/#inspecting-schemas)
 
@@ -123,29 +123,29 @@ Every **`Runnables`** are characterized by an input and output types (It can be 
 
 - A **`RunnableConfig`** can have any of the following properties defined:
 
-| Attribute | Description |
-|-----------|-------------|
-| run_name | Name used for the given Runnable (not inherited). |
-| run_id | Unique identifier for this call. sub-calls will get their own unique run ids. |
-| tags | Tags for this call and any sub-calls. |
-| metadata | Metadata for this call and any sub-calls. |
-| callbacks | Callbacks for this call and any sub-calls. |
-| max_concurrency | Maximum number of parallel calls to make (e.g., used by batch). |
-| recursion_limit | Maximum number of times a call can recurse (e.g., used by Runnables that return Runnables) |
-| configurable | Runtime values for configurable attributes of the Runnable. |
+  | Attribute | Description |
+  |-----------|-------------|
+  | run_name | Name used for the given Runnable (not inherited). |
+  | run_id | Unique identifier for this call. sub-calls will get their own unique run ids. |
+  | tags | Tags for this call and any sub-calls. |
+  | metadata | Metadata for this call and any sub-calls. |
+  | callbacks | Callbacks for this call and any sub-calls. |
+  | max_concurrency | Maximum number of parallel calls to make (e.g., used by batch). |
+  | recursion_limit | Maximum number of times a call can recurse (e.g., used by Runnables that return Runnables) |
+  | configurable | Runtime values for configurable attributes of the Runnable. |
 
-- **Example**
-
-    ```py
-    some_runnable.invoke(
-    some_input, 
-    config={
-      'run_name': 'my_run', 
-      'tags': ['tag1', 'tag2'], 
-      'metadata': {'key': 'value'}
-      
-    })
-    ```
+  - **Example**
+  
+      ```py
+      some_runnable.invoke(
+      some_input, 
+      config={
+        'run_name': 'my_run', 
+        'tags': ['tag1', 'tag2'], 
+        'metadata': {'key': 'value'}
+        
+      })
+      ```
 
 ## Propagation of **`RunnableConfig`**
 
