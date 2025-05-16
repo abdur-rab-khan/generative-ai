@@ -23,7 +23,50 @@
 - **Example to pass image**
 
   ```py
-  from lang
+  from langchain_core.messages import HumanMessage
+
+  message = HumanMessage(
+      content=[
+          {"type": "text", "text": "Describe the weather in this image:"},
+          {
+              "type": "image",
+              "source_type": "url",
+              "url": "https://...",
+          },
+      ],
+  )
+
+  response = model.invoke([message])
   ```
 
+- We can pass the image as in data-line
+
+  ```py
+  from langchain_core.messages import HumanMessage
+  
+  message = HumanMessage(
+      content=[
+          {"type": "text", "text": "Describe the weather in this image:"},
+          {
+              "type": "image",
+              "source_type": "base64",
+              "data": "<base64 string>",
+              "mime_type": "image/jpeg",
+          },
+      ],
+  )
+  response = model.invoke([message])
+  ```
+
+- To pass **`PDF`** that are supported by some models such as **Anthropic** than use following configuration.
+  - **`source_type`** : **`file`**
+  - **`mime_type`** : **`application/pdf`**
+
+- See multimodality from [**here**](https://python.langchain.com/docs/integrations/chat/openai/#multimodal-inputs).
+
 ### 2. Output
+
+- Some models are also support multimodality as a output, such as image, audio.
+- Here is following example
+  - Generating [audio outputs](https://python.langchain.com/docs/integrations/chat/openai/#audio-generation-preview) with OpenAI.
+  - Generating [image outputs](https://python.langchain.com/docs/integrations/chat/google_generative_ai/#multimodal-usage) with Google Gemini.
