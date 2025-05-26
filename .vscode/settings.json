@@ -2,5 +2,6 @@
     "cSpell.words": [
         "Multimodality"
     ],
-    "terminal.integrated.fontLigatures.enabled": true
+    "terminal.integrated.fontLigatures.enabled": true,
+    "editor.fontSize": 12
 }
