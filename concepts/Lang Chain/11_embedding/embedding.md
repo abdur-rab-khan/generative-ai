@@ -51,5 +51,12 @@
 
 - LangChain provides many embedding models you can find them from [**here**](https://python.langchain.com/docs/integrations/text_embedding/).
 
-
 ## Measure similarity
+
+- Embeddings are essentially a set of **coordinates** represented as vectors, often arranged in a matrix. The position of each points in this **coordinates space** reflects the meaning of corresponding text.
+- In this **coordinates** space, similar text might to be located close to each other. This proximity allows for intuitive comparison between texts, helping **Language models** to predict answer that are relevant to the input query.
+- By converting text into **numerical matrix representations**, We can perform any mathematical operations to quickly measure how two piece of text are---regardless of their original length of structure.
+- Some common similarity matrix includes
+  1. **Cosine Similarity:**  A metric used to measure how similar two vectors are, based on the angle between them, regardless of their magnitude.
+  2. **Euclidean Distance:** Euclidean distance is a measure of the **straight-line** distance between two points in a **multi-dimensional space**
+  3. **Dot Product:** An operation in linear algebra that takes two vectors and returns a single scalar value. It reflects how much two vectors point in the same direction
