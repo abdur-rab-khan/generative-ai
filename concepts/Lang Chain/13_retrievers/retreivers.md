@@ -1,6 +1,6 @@
 # Retrievers system
 
-> A retrievers system is used to retrieve documents by querying it, we commonly saw in **Vector Database**, **Graph Database** and **Relational Database**. As **AI** going more popular now days, the retrievers system have become more popular (e.g **RAG**).
+> A retrievers system is used to retrieve documents by querying it, we commonly saw in **Vector Database**, **Graph Database** and **Relational Database**. As **AI** going more popular now days, the retrievers system have become more popular (e.g **RAG**), that is used to retrieve relevant document and pass them into **LLM**.
 
 - [Retrievers system](#retrievers-system)
   - [Key Concept](#key-concept)
@@ -93,7 +93,7 @@
 
 ## Advanced retrieval patterns
 
-### Ensemble
+### [Ensemble](https://python.langchain.com/docs/how_to/ensemble_retriever/)
 
 - In retrieval system it's possible to combine **multiple retrieval's** using ensemble. the is useful when we are building retrievers that are good at finding different types of relevant documents.
 - It is easy to create an ensemble retriever that combines multiple retrievers with linear weighted scores:
@@ -106,9 +106,19 @@
     )
     ```
 
-  - When ensembling, there are some concepts like how do we combine search result from many retrievers? 
+  - When ensembling, there are some concepts like how do we combine search result from many retrievers?
   - We have the concept of **re-ranking**, which takes the output of multiple retrievers and combines them using a more sophisticated algorithm such as [**Reciprocal Rank Fusion (RRF)**](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf).
 
+### [Source document retention](https://python.langchain.com/docs/concepts/retrievers/#source-document-retention)
 
-### Source document retention
+- To make easily searchable on any documents, We use some kind of indexing, that is done by **transformation** step (e.g **vector store** often with **text-splitter**).
+- Whatever transformation is used, we can easily retain the link between ***transformed document*** and ***original document***, giving the ability to **retrieval** to return **original document.**
+  
+  ![retriever-system](https://python.langchain.com/assets/images/retriever_full_docs-e6282aafd63f69ab3fcb26b2cfc46b5c.png)
 
+- It is very useful in **AI** application, because ensuring no loss in document context for the model.
+- **For Example:** If we use **small chunks** size for indexing the documents in vector store. if we return only the chunks as the retrieval return, It may lost the original document context. to solve this LangChain Provides **two** different retrieval techniques.
+  1. [**Multi-Vector Retrieval:**](https://python.langchain.com/docs/how_to/multi_vector/)
+      - A Multi-Vector Retrieval is used to
+  2. [**ParentDocument Retrieval:**](https://python.langchain.com/docs/how_to/parent_document_retriever/)
+      - A ParentDocument Retrieval is used to
